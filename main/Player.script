@@ -1,0 +1,165 @@
+-- function init(self)
+-- 	-- Add initialization code here
+-- 	-- Learn more: https://defold.com/manuals/script/
+-- 	-- Remove this function if not needed
+-- 	msg.post(".","acquire_input_focus")
+-- end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+--function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+--end
+
+function fixed_update(self, dt)
+	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
+	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
+	-- Physics section of game.project
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
+
+
+function on_input(self, action_id, action)
+	local pos = go.get_position()
+	local screen_width = tonumber(sys.get_config("display.width"))
+	local screen_height = tonumber(sys.get_config("display.height"))
+
+	if action_id == hash("left") then
+		pos.x = math.max(0, pos.x - 10) -- Ensure the player stays within the left boundary
+	elseif action_id == hash("right") then
+		pos.x = math.min(screen_width, pos.x + 10) -- Ensure the player stays within the right boundary
+	elseif action_id == hash("up") then
+		pos.y = math.min(screen_height, pos.y + 10) -- Ensure the player stays within the upper boundary
+	elseif action_id == hash("down") then
+		pos.y = math.max(0, pos.y - 10) -- Ensure the player stays within the lower boundary
+	end
+
+	go.set_position(pos)
+end
+
+
+
+-- player_movement.script (assuming you're using the same script for both player and enemy generation)
+
+-- function init(self)
+-- 	msg.post(".", "acquire_input_focus")
+-- 
+-- 	-- -- Set up enemy spawning timer
+-- 	-- self.enemy_spawn_timer = 0
+-- 	-- self.enemy_spawn_interval = 2 -- Set the interval in seconds (adjust as needed)
+-- end
+
+-- function update(self, dt)
+-- 	-- Update the enemy spawning timer
+-- 	self.enemy_spawn_timer = self.enemy_spawn_timer + dt
+-- 
+-- 	-- Check if it's time to spawn a new enemy
+-- 	if self.enemy_spawn_timer >= self.enemy_spawn_interval then
+-- 		spawn_enemy()
+-- 		self.enemy_spawn_timer = 0 -- Reset the timer
+-- 	end
+-- end
+-- 
+-- function spawn_enemy()
+-- 	local screen_width = tonumber(sys.get_config("display.width"))
+-- 	local screen_height = tonumber(sys.get_config("display.height"))
+-- 
+-- 	-- Create an enemy game object
+-- 	local enemy = factory.create("#factory") -- Assuming you have an enemy factory set up in your project
+-- 
+-- 	-- Set the enemy's position to a random position on the screen
+-- 	local enemy_pos = vmath.vector3(math.random(0, screen_width), math.random(0, screen_height), 0)
+-- 	go.set_position(enemy, enemy_pos)
+-- end
+
+
+-- This is a simplified example and might not work directly in Defold.
+-- You'll need to adapt it to your specific game structure.
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	sound.play("#background_music")
+	timer.delay(1, true, function()
+		
+	end)
+	-- Define the screen dimensions
+	self.screen_width = 1920 -- replace with your screen width
+	self.screen_height = 1080 -- replace with your screen height
+
+	-- Define the alien factory
+	self.alien_factory = "#factory" -- replace with your alien factory url
+
+	-- Start the spawn timer
+	self.spawn_interval = 5 -- spawn an alien every 1 second
+	timer.delay(self.spawn_interval, true, function() spawn_alien(self) end)
+
+	-- Define the scale
+	local scale = vmath.vector3(10, 10, 10) -- replace with your desired scale
+
+
+	-- Set up enemy spawning timer
+	self.enemy_spawn_timer = 0
+	self.enemy_spawn_interval = 2
+
+	-- Initialize the score
+	self.score = 0
+
+	-- Set the game duration in seconds (adjust as needed)
+	self.game_duration = 60 -- 1 minute
+	self.timer = self.game_duration
+
+	-- Start the game timer
+	self.game_duration = 60.0 -- game lasts for 60 seconds
+	timer.delay(self.game_duration, false, function() game_over(self) end)
+end
+
+	
+
+function update(self, dt)
+	-- Your existing update logic
+
+	-- Update the timer
+	self.timer = math.max(0, self.timer - dt)
+
+	-- Check if the timer reaches zero
+	if self.timer == 0 then
+		game_over()
+	end
+end
+
+function spawn_alien(self)
+	-- Generate a random position within the screen bounds
+	local position = vmath.vector3(math.random(0, self.screen_width), math.random(0, self.screen_height), 0)
+
+	-- Spawn an alien at the random position
+	factory.create(self.alien_factory, position, nil, {}, scale)
+end
+
+
+
+function game_over()
+	print("Game Over! Score: " .. self.score)
+	-- Add additional game over logic here (e.g., display a message, reset the game)
+end
