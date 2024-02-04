@@ -1,8 +1,28 @@
-function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+local function countdown(label_url, seconds)
+	-- Find the GUI node by its ID
+	local label_node = gui.get_node(label_url)
+
+	-- start a repeating timer with a 1 second interval
+	timer.delay(1, true, function(self, handle, time_elapsed)
+		-- decrease seconds and update label
+		seconds = seconds - 1
+
+		-- update the text of the label node
+		gui.set_text(label_node, tostring(seconds))
+
+		-- cancel timer when countdown reaches 0
+		if seconds <= 0 then
+			timer.cancel(handle)
+		end
+	end)
 end
+
+function init(self)
+	-- start the countdown at 60 seconds, assuming "time_label" is the ID of your GUI text node
+	countdown("timer", 60)
+end
+
+-- ... (rest of your code)
 
 function final(self)
 	-- Add finalization code here
@@ -10,13 +30,7 @@ function final(self)
 	-- Remove this function if not needed
 end
 
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-local score=0
+local score=-1
 
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
@@ -24,8 +38,12 @@ function on_message(self, message_id, message, sender)
 	-- Remove this function if not needed
 	print("hi",message_id)
 	score=score+1
-	gui.set_text(gui.get_node("score"), score)
+	gui.set_text(gui.get_node("score"), tostring(score))
 end
+
+
+
+
 
 function on_input(self, action_id, action)
 	-- Add input-handling code here. The game object this script is attached to

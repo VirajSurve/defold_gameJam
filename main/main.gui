@@ -73,8 +73,8 @@ nodes {
 }
 nodes {
   position {
-    x: 2191.4377
-    y: 6.824805
+    x: 538.2245
+    y: -5.687339
     z: 0.0
     w: 1.0
   }
@@ -85,8 +85,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 3.825161
-    y: 3.130579
+    x: 4.527946
+    y: 3.92645
     z: 1.0
     w: 1.0
   }
@@ -140,8 +140,8 @@ nodes {
 }
 nodes {
   position {
-    x: 2055.885
-    y: 6.824805
+    x: 306.9874
+    y: -3.412404
     z: 0.0
     w: 1.0
   }
@@ -152,8 +152,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 3.868483
-    y: 3.049361
+    x: 4.090186
+    y: 3.871286
     z: 1.304
     w: 1.0
   }
@@ -171,7 +171,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Score"
+  text: "Your Score:\n"
+  ""
   font: "system_font"
   id: "text"
   xanchor: XANCHOR_NONE
@@ -187,6 +188,141 @@ nodes {
     x: 1.0
     y: 1.0
     z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "box"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 1872.4899
+    y: -7.962272
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 4.485039
+    y: 3.950004
+    z: 4.433472
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Time Remaining: \n"
+  ""
+  font: "system_font"
+  id: "text1"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "box"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 2191.4377
+    y: -10.237207
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 3.743602
+    y: 3.870637
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "60"
+  font: "system_font"
+  id: "timer"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 0.0
+    y: 0.0
+    z: 0.0
     w: 1.0
   }
   adjust_mode: ADJUST_MODE_FIT

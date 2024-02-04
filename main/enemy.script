@@ -1,8 +1,13 @@
--- function init(self)
--- 	-- Add initialization code here
--- 	-- Learn more: https://defold.com/manuals/script/
--- 	-- Remove this function if not needed
--- end
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+
+	timer.delay(5, false, function()
+		go.delete()
+	end)
+	
+end
 
 function final(self)
 	-- Add finalization code here
@@ -35,17 +40,6 @@ function on_message(self, message_id, message, sender)
 	end	
 end
 
--- function on_input(self, action_id, action)
--- 	-- Add input-handling code here. The game object this script is attached to
--- 	-- must have acquired input focus:
--- 	--
--- 	--    msg.post(".", "acquire_input_focus")
--- 	--
--- 	-- All mapped input bindings will be received. Mouse and touch input will
--- 	-- be received regardless of where on the screen it happened.
--- 	-- Learn more: https://defold.com/manuals/input/
--- 	-- Remove this function if not needed
--- end
 
 function on_reload(self)
 	-- Add reload-handling code here
@@ -53,59 +47,3 @@ function on_reload(self)
 	-- Remove this function if not needed
 end
 
-
--- function init(self)
--- 	msg.post(".", "acquire_input_focus")
--- end
--- 
--- function on_input(self, action_id, action)
--- 	local pos = go.get_position()
--- 	local screen_width = tonumber(sys.get_config("display.width"))
--- 	local screen_height = tonumber(sys.get_config("display.height"))
--- 
--- 	if action_id == hash("left") then
--- 		pos.x = math.max(0, pos.x - 10)
--- 	elseif action_id == hash("right") then
--- 		pos.x = math.min(screen_width, pos.x + 10)
--- 	elseif action_id == hash("up") then
--- 		pos.y = math.min(screen_height, pos.y + 10)
--- 	elseif action_id == hash("down") then
--- 		pos.y = math.max(0, pos.y - 10)
--- 	end
--- 
--- 	go.set_position(pos)
--- 
--- 	-- Spawn enemy at random position
--- 	if math.random() < 0.01 then -- Adjust the probability of enemy spawn as needed
--- 		spawn_enemy()
--- 	end
--- end
--- 
--- function spawn_enemy()
--- 	local enemy_pos = vmath.vector3(math.random(0, tonumber(sys.get_config("display.width"))), 
--- 	math.random(0, tonumber(sys.get_config("display.height"))), 
--- 	0)
--- 
--- 	factory.create("#enemy_factory", enemy_pos, nil, {})
--- end
-
-
--- This is a simplified example and might not work directly in Defold.
--- You'll need to adapt it to your specific game structure.
-
-function init(self)
-	-- Define the screen dimensions
-	self.screen_width = 1920 -- replace with your screen width
-	self.screen_height = 1080 -- replace with your screen height
-
-	-- Define the alien factory
-	self.alien_factory = "#alien_factory" -- replace with your alien factory url
-end
-
-function spawn_alien(self)
-	-- Generate a random position within the screen bounds
-	local position = vmath.vector3(math.random(0, self.screen_width), math.random(0, self.screen_height), 0)
-
-	-- Spawn an alien at the random position
-	factory.create(self.alien_factory, position)
-end

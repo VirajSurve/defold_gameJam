@@ -1,4 +1,4 @@
--- function init(self)
+--function init(self)
 -- 	-- Add initialization code here
 -- 	-- Learn more: https://defold.com/manuals/script/
 -- 	-- Remove this function if not needed
@@ -99,8 +99,10 @@ end
 -- You'll need to adapt it to your specific game structure.
 
 function init(self)
-	msg.post(".", "acquire_input_focus")
 	sound.play("#background_music")
+	msg.post(".", "acquire_input_focus")
+	
+	
 	timer.delay(1, true, function()
 		
 	end)
@@ -112,7 +114,7 @@ function init(self)
 	self.alien_factory = "#factory" -- replace with your alien factory url
 
 	-- Start the spawn timer
-	self.spawn_interval = 5 -- spawn an alien every 1 second
+	self.spawn_interval = 1 -- spawn an alien every 1 second
 	timer.delay(self.spawn_interval, true, function() spawn_alien(self) end)
 
 	-- Define the scale
@@ -125,29 +127,13 @@ function init(self)
 
 	-- Initialize the score
 	self.score = 0
-
-	-- Set the game duration in seconds (adjust as needed)
-	self.game_duration = 60 -- 1 minute
-	self.timer = self.game_duration
-
+	
 	-- Start the game timer
 	self.game_duration = 60.0 -- game lasts for 60 seconds
 	timer.delay(self.game_duration, false, function() game_over(self) end)
 end
 
 	
-
-function update(self, dt)
-	-- Your existing update logic
-
-	-- Update the timer
-	self.timer = math.max(0, self.timer - dt)
-
-	-- Check if the timer reaches zero
-	if self.timer == 0 then
-		game_over()
-	end
-end
 
 function spawn_alien(self)
 	-- Generate a random position within the screen bounds
@@ -157,9 +143,7 @@ function spawn_alien(self)
 	factory.create(self.alien_factory, position, nil, {}, scale)
 end
 
-
-
-function game_over()
-	print("Game Over! Score: " .. self.score)
-	-- Add additional game over logic here (e.g., display a message, reset the game)
+function game_over(self)
+	-- End the game
+	msg.post("@system:", "exit", { code = 0 })
 end

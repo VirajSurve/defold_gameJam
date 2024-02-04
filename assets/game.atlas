@@ -16,10 +16,25 @@ animations {
 animations {
   id: "enemy"
   images {
-    image: "/assets/ufo-cartoon-small-updates-hi.png"
+    image: "/assets/enemy/enemy1.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
-  playback: PLAYBACK_NONE
+  images {
+    image: "/assets/enemy/enemy2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/assets/enemy/enemy3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "New Animation"
+  playback: PLAYBACK_LOOP_FORWARD
   fps: 60
   flip_horizontal: 0
   flip_vertical: 0
